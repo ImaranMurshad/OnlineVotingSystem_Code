@@ -2,6 +2,7 @@
 Django settings for online_voting_system project.
 """
 
+import os
 from pathlib import Path
 
 # BASE DIR
@@ -105,7 +106,7 @@ USE_TZ = True
 # STATIC FILES
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]  # 🔥 optional but recommended
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # DEFAULT PRIMARY KEY
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
