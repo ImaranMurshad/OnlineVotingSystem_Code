@@ -37,6 +37,10 @@ jobs:
           cd online_voting_system
           python manage.py migrate
 
+
+          echo "Collect static files"
+          python manage.py collectstatic --noinput
+
           echo "Restart Gunicorn"
           sudo systemctl restart gunicorn
 
