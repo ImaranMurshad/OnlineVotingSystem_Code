@@ -1,0 +1,57 @@
+# 🔹 Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# 🔹 Virtual Environment
+venv/
+.venv/
+env/
+ENV/
+
+# 🔹 Django stuff
+*.log
+db.sqlite3
+db.sqlite3-journal
+
+# 🔹 Static & media (optional depending on setup)
+staticfiles/
+media/
+
+# 🔹 Environment variables
+.env
+.env.*
+
+# 🔹 VS Code
+.vscode/
+
+# 🔹 PyCharm
+.idea/
+
+# 🔹 OS files
+.DS_Store
+Thumbs.db
+
+# 🔹 Testing / coverage
+.coverage
+htmlcov/
+.tox/
+.pytest_cache/
+
+# 🔹 Build files
+*.egg-info/
+dist/
+build/
+
+# 🔹 GitHub secrets (important!)
+*.pem
+*.key
+
+# 🔹 Gunicorn / deployment
+gunicorn.log
+*.sock
+
+# 🔹 Migrations cache (optional)
+# migrations/*
+# !migrations/__init__.py
