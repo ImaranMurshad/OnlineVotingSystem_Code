@@ -1,4 +1,4 @@
-name: Deploy Django to EC2
+name: CI/CD Django App
 
 on:
   push:
@@ -6,7 +6,41 @@ on:
       - main
 
 jobs:
+
+  # 🔍 JOB 1: Code Quality + Security Checks
+  checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install flake8 pylint bandit pip-audit
+
+      - name: Run Flake8
+        run: flake8 .
+
+      - name: Run Pylint
+        run: pylint online_voting_system || true
+        # ⚠️ don't fail pipeline yet (optional)
+
+      - name: Run Bandit (Security Scan)
+        run: bandit -r . -ll
+
+      - name: Run pip-audit (Dependency Scan)
+        run: pip-audit
+
+  # 🚀 JOB 2: Deploy (only if checks pass)
   deploy:
+    needs: checks
     runs-on: ubuntu-latest
 
     steps:
@@ -24,28 +58,27 @@ jobs:
           
           cd ${{ secrets.PROJECT_PATH }}
 
-          echo "Pull latest code"
+          echo "📥 Pull latest code"
           git pull origin main
 
-          echo " Activate venv"
+          echo "🐍 Activate venv"
           source venv/bin/activate
 
-          echo "Install dependencies"
+          echo "📦 Install dependencies"
           pip install -r requirements.txt
 
-          echo " Run migrations"
+          echo "⚙️ Run migrations"
           cd online_voting_system
           python manage.py migrate
 
-
-          echo "Collect static files"
+          echo "📁 Collect static"
           python manage.py collectstatic --noinput
 
-          echo "Restart Gunicorn"
+          echo "🔄 Restart Gunicorn"
           sudo systemctl restart gunicorn
 
-           echo "Restart Nginx"
+          echo "🌐 Restart Nginx"
           sudo systemctl restart nginx
 
-          echo "Deployment done"
+          echo "✅ Deployment done"
           EOF

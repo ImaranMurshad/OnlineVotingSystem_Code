@@ -1,6 +1,7 @@
 from django import forms
 from .models import Election
 
+
 class ElectionForm(forms.ModelForm):
     class Meta:
         model = Election

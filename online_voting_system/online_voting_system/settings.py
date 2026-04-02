@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY
 SECRET_KEY = 'django-insecure-k+ifef0((m#n1!o96+eo^1!k$ey-165(7c9y6-^*!llz^05cfm'
 DEBUG = True
-ALLOWED_HOSTS = ['16.16.50.116', 'ec2-16-16-50-116.eu-north-1.compute.amazonaws.com' ]
+ALLOWED_HOSTS = ['16.16.50.116', 'ec2-16-16-50-116.eu-north-1.compute.amazonaws.com']
 
 
 # INSTALLED APPS
@@ -118,5 +118,5 @@ AUTH_USER_MODEL = 'accounts.User'
 
 # 🔥 LOGIN CONFIG (VERY IMPORTANT FIX)
 LOGIN_URL = '/login/'                     # fixes /accounts/login/ error
-LOGIN_REDIRECT_URL = '/voter/dashboard/' # fallback redirect
+LOGIN_REDIRECT_URL = '/voter/dashboard/'  # fallback redirect
 LOGOUT_REDIRECT_URL = '/login/'          # after logout
