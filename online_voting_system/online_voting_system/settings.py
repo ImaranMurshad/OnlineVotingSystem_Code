@@ -9,10 +9,14 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# SECURITY
-SECRET_KEY = 'django-insecure-k+ifef0((m#n1!o96+eo^1!k$ey-165(7c9y6-^*!llz^05cfm'
-DEBUG = True
-ALLOWED_HOSTS = ['16.16.50.116', 'ec2-16-16-50-116.eu-north-1.compute.amazonaws.com']
+SECRET_KEY = os.environ.get('SECRET_KEY', 'unsafe-dev-key')
+
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+
+ALLOWED_HOSTS = os.environ.get(
+    'ALLOWED_HOSTS',
+    '127.0.0.1,localhost'
+).split(',')
 
 
 # INSTALLED APPS
