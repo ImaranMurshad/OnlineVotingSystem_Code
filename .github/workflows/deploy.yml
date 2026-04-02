@@ -33,7 +33,8 @@ jobs:
         # ⚠️ don't fail pipeline yet (optional)
 
       - name: Run Bandit (Security Scan)
-        run: bandit -r . -ll
+        run: |
+          bandit -r . -x venv,env,__pycache__,migrations
 
       - name: Run pip-audit (Dependency Scan)
         run: pip-audit
